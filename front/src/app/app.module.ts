@@ -9,12 +9,17 @@ import { CadastroComponent } from './components/cadastro/cadastro.component';
 import {InputTextModule} from 'primeng/inputtext';
 import {ButtonModule} from 'primeng/button';
 import {FormsModule , ReactiveFormsModule} from '@angular/forms'
+import {ToastModule} from 'primeng/toast';
+import { ToastUtilDirective } from './shared/toast-util.directive';
+import {PasswordModule} from 'primeng/password';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    CadastroComponent
+    CadastroComponent,
+    ToastUtilDirective
   ],
   imports: [
     BrowserModule,
@@ -23,7 +28,10 @@ import {FormsModule , ReactiveFormsModule} from '@angular/forms'
     InputTextModule,
     ButtonModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ToastModule,
+    PasswordModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

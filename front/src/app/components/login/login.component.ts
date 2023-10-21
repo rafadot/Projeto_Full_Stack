@@ -1,14 +1,21 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms'
+import {MessageService} from 'primeng/api';
+import { ToastUtilDirective } from 'src/app/shared/toast-util.directive';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css'],
+  providers : [MessageService]
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent extends ToastUtilDirective implements OnInit {
 
-  constructor() { }
+  toggleMask : boolean;
+
+  constructor(ms : MessageService) { 
+    super(ms);
+  }
 
   ngOnInit(): void {
     this.formModel = new FormGroup({
@@ -17,17 +24,13 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  get username(){
-    return this.formModel.get('username')
-  }
-
-  get password(){
-    return this.formModel.get('password')
-  }
-
   formModel : FormGroup;
 
   submit() {
-    console.log(this.username)
+    if(this.formModel.valid){
+      this.toastSucess('Logado com sucesso!');
+    }else{
+      this.toastErro('Erro ao efetuar o login', 'Preencha todos os campos para realizar o login');
+    }
   }
 }

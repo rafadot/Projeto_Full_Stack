@@ -1,1 +1,45 @@
-<p>cadastro works!</p>
+<body>
+    <div class="cadastro-container">
+
+        <div class="titulo">
+            <h1>CADASTRO</h1>
+        </div>
+
+        <form (ngSubmit)="submit()" [formGroup]="formModel" #formDir="ngForm">
+
+            <div class="form-group">
+                <label for="name">Nome</label>
+                <input type="text" formControlName="name" placeholder="Digite seu nome e sobrenome" pInputText />
+            </div>
+
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" formControlName="username" placeholder="Digite seu nome de usuário" pInputText />
+            </div>
+
+            <div class="form-group">
+                <label for="senha" >Senha</label>
+                <input type="password" formControlName="password" 
+                placeholder="Digite sua senha" [(ngModel)]="password"
+                pPassword  />
+            </div>
+
+            <div class="form-group">
+                <label >Confirme a senha</label>
+                <input type="password" formControlName="confirmPassword" 
+                placeholder="Confirme sua senha" [(ngModel)]="confirmPassword"
+                pInputText />
+
+                <div *ngIf="!senhasIgauis()">
+                    <small class="p-invalid">As senhas devem ser iguais</small>
+                </div>
+
+            </div>
+
+            <button pButton type="submit" label="Cadastrar" class="p-button-warning"></button>
+
+        </form>
+    
+    </div>
+</body>
+<p-toast position="top-center"></p-toast>
