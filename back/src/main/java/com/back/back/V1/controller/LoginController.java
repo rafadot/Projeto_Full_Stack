@@ -21,10 +21,4 @@ public class LoginController {
     public ResponseEntity<Map<String, String>> login(@RequestBody LoginDTO loginDTO){
         return new ResponseEntity<>(userService.login(loginDTO), HttpStatus.OK);
     }
-
-    @GetMapping
-    public String teste(){
-        emailService.teste();
-        return "foi";
-    }
 }
