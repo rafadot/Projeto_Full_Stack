@@ -10,7 +10,6 @@ import java.time.Instant;
 
 @RestControllerAdvice
 public class ExceptionsHandler {
-
     @ExceptionHandler(BadRequestException.class)
     public ResponseEntity<BodyError> badRequest(BadRequestException e, HttpServletRequest request){
         return ResponseEntity.badRequest().body(

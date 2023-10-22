@@ -1,10 +1,10 @@
 package com.back.back.V1.service;
 
-import com.back.back.V1.model.User;
 import com.back.back.V1.model.dto.LoginDTO;
 import com.back.back.V1.model.dto.UserResponse;
 import com.back.back.V1.repository.UserRepository;
 import com.back.back.exceptions.BadRequestException;
+import com.back.back.V1.model.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.security.crypto.password.PasswordEncoder;

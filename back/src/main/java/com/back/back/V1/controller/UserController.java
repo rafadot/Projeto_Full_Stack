@@ -1,8 +1,8 @@
 package com.back.back.V1.controller;
 
-import com.back.back.V1.model.User;
 import com.back.back.V1.model.dto.UserResponse;
 import com.back.back.V1.repository.UserRepository;
+import com.back.back.V1.model.User;
 import com.back.back.V1.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
