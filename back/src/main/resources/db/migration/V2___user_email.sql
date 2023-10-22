@@ -1,0 +1,1 @@
+alter table user_app add column email varchar;

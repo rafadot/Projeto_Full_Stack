@@ -13,13 +13,15 @@ import {ToastModule} from 'primeng/toast';
 import { ToastUtilDirective } from './shared/toast-util.directive';
 import {PasswordModule} from 'primeng/password';
 import { HttpClientModule } from '@angular/common/http';
+import { RecuperarSenhaComponent } from './components/recuperar-senha/recuperar-senha.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     CadastroComponent,
-    ToastUtilDirective
+    ToastUtilDirective,
+    RecuperarSenhaComponent
   ],
   imports: [
     BrowserModule,

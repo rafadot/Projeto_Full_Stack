@@ -19,6 +19,7 @@ export class CadastroComponent extends ToastUtilDirective implements OnInit {
   confirmPassword : string = '';
   password : string = '';
   user : User;
+  cadastroHabilitado : boolean = true;
 
   constructor(
     messageService : MessageService,
@@ -33,7 +34,8 @@ export class CadastroComponent extends ToastUtilDirective implements OnInit {
       name :  new FormControl('', Validators.required),
       username : new FormControl('', Validators.required),
       password : new FormControl('', Validators.required),
-      confirmPassword : new FormControl('', Validators.required)
+      confirmPassword : new FormControl('', Validators.required),
+      email : new FormControl('',Validators.required)
     });
   }
 
@@ -50,19 +52,20 @@ export class CadastroComponent extends ToastUtilDirective implements OnInit {
         nome : this.formModel.get('name').value,
         username : this.formModel.get('username').value,
         senha : this.formModel.get('password').value,
+        email : this.formModel.get('email').value
       }
 
       this.userService.create(this.user).subscribe(()=>{
+        this.cadastroHabilitado = false;
         this.toastSucess('Cadastro realizado com sucesso');
+
         setTimeout(() => {
-          this.router.navigate(['/login'])
+          this.goLogin();
         }, 2000);
       },(error)=>{
         console.log(error)
         this.toastErro(error.error.message);
       });
-
-      
 
     }else{
       this.toastErro('Preencha todos os campos');
@@ -71,6 +74,10 @@ export class CadastroComponent extends ToastUtilDirective implements OnInit {
 
   senhasIgauis() : boolean{
     return this.password == this.confirmPassword;
+  }
+
+  goLogin() : void{
+    this.router.navigate(['/login'])
   }
 
 }

@@ -1,0 +1,18 @@
+<body>
+    <div class="container">
+        <i class="pi pi-arrow-left" (click)="goLogin()"></i>
+
+        <form (ngSubmit)="submit()" [formGroup]="formModel" #formDir="ngForm">
+            
+            <div class="form-group">
+                <label for="email-or-username">Digite seu email ou seu nome de usuário para recuperar a senha.</label>
+                <input type="text" formControlName="userOrEmail" placeholder="Digite seu email ou usuário" pInputText />
+            </div>
+
+            <button pButton type="submit" label="Enviar" 
+            class="p-button-warning" [disabled]="!cadastroHabilitado"></button>
+
+        </form>
+
+    </div>
+</body>

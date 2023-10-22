@@ -7,6 +7,13 @@ body{
     justify-content: center;
 }
 
+button{
+    width: 100%;
+    margin-top: 20px;
+    color: #fff !important;
+    height: 44px;
+}
+
 form{
     display: flex;
     flex-direction: column;
@@ -24,7 +31,7 @@ input::placeholder{
     line-height: normal;
 }
 
-.cadastro-container{
+.container{
     width: 475px;
     height: auto;
     background-color: #fff;
@@ -35,24 +42,6 @@ input::placeholder{
     align-items: center;
     border-radius: 20px;
     box-shadow: 2px 5px 10px 0px rgba(0, 0, 0, 0.10);
-}
-
-.titulo{
-    border-left: #F8D442 6px solid;
-    padding-left: 10px;
-}
-
-.form-group{
-    display: flex;
-    flex-direction: column;   
-    width: 100%;
-    gap: 2px;
-}
-
-button{
-    width: 100%;
-    color: #fff !important;
-    height: 44px;
 }
 
 .pi-arrow-left{
@@ -67,4 +56,11 @@ button{
 
 .pi-arrow-left:active{
     color: #a1892a;
+}
+
+.form-group{
+    display: flex;
+    flex-direction: column;   
+    width: 100%;
+    gap: 10px;
 }

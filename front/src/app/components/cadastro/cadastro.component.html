@@ -1,6 +1,8 @@
 <body>
     <div class="cadastro-container">
 
+        <i class="pi pi-arrow-left" (click)="goLogin()"></i>
+        
         <div class="titulo">
             <h1>CADASTRO</h1>
         </div>
@@ -15,6 +17,11 @@
             <div class="form-group">
                 <label for="username">Username</label>
                 <input type="text" formControlName="username" placeholder="Digite seu nome de usuário" pInputText />
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="text" formControlName="email" placeholder="Digite seu email" pInputText />
             </div>
 
             <div class="form-group">
@@ -36,7 +43,8 @@
 
             </div>
 
-            <button pButton type="submit" label="Cadastrar" class="p-button-warning"></button>
+            <button pButton type="submit" label="Cadastrar" 
+            class="p-button-warning" [disabled]="!cadastroHabilitado"></button>
 
         </form>
     

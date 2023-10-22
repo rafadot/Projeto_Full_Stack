@@ -3,6 +3,7 @@ export class User{
     nome : string;
     username : string;
     senha : string;
+    email : string;
 
     constructor(object?){
         if(object)
