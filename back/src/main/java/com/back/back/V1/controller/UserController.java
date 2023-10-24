@@ -16,15 +16,10 @@ import java.util.List;
 @RequiredArgsConstructor
 public class UserController {
     private final UserService userService;
-    private final UserRepository userRepository;
 
     @PostMapping
     public ResponseEntity<UserResponse> create(@RequestBody User userRequest){
         return new ResponseEntity<>(userService.createUser(userRequest), HttpStatus.CREATED);
     }
 
-    @GetMapping
-    public ResponseEntity<List<User>> teste(){
-        return new ResponseEntity<>(userRepository.findAll(),HttpStatus.OK);
-    }
 }

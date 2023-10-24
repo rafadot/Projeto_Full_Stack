@@ -1,7 +1,9 @@
 package com.back.back.V1.service;
 
+import com.back.back.V1.model.RecuperarSenha;
 import com.back.back.V1.model.dto.LoginDTO;
 import com.back.back.V1.model.dto.UserResponse;
+import com.back.back.V1.repository.RecuperarSenhaRepository;
 import com.back.back.V1.repository.UserRepository;
 import com.back.back.exceptions.BadRequestException;
 import com.back.back.V1.model.User;
@@ -10,6 +12,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -18,7 +21,9 @@ import java.util.Map;
 public class UserService {
     private final UserRepository userRepository;
     private final PasswordEncoder encoder;
+    private final RecuperarSenhaRepository recuperarSenhaRepository;
 
+    @Transactional
     public UserResponse createUser(User userRequest){
         if(userRepository.findByUsername(userRequest.getUsername()).isPresent())
             throw new BadRequestException("Username já cadastrado!");
@@ -32,18 +37,6 @@ public class UserService {
         UserResponse response = new UserResponse();
         BeanUtils.copyProperties(user,response);
 
-        return response;
-    }
-
-    public Map<String, String> login(LoginDTO loginDTO){
-        User user = userRepository.findByUsername(loginDTO.getUsername())
-                .orElseThrow(()-> new BadRequestException("Nome de usuário inválido"));
-
-        if(!encoder.matches(loginDTO.getSenha(),user.getSenha()))
-            throw new BadRequestException("Senha incorreta");
-
-        Map<String,String> response = new HashMap<>();
-        response.put("message","Logado com sucesso");
         return response;
     }
 }

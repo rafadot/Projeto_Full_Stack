@@ -1,14 +1,15 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { LoginComponent } from './components/login/login.component';
-import { CadastroComponent } from './components/cadastro/cadastro.component';
-import { RecuperarSenhaComponent } from './components/recuperar-senha/recuperar-senha.component';
+import { TelaInicialComponent } from './components/tela-inicial/tela-inicial.component';
+import { LoginComponent } from './components/tela-inicial/login/login.component';
+import { CadastroComponent } from './components/tela-inicial/cadastro/cadastro.component';
 
 const routes: Routes = [
-  {path:'login' , component : LoginComponent},
-  {path:'' , component : LoginComponent},
-  {path:'cadastro' , component : CadastroComponent},
-  {path:'recuperar-senha' , component : RecuperarSenhaComponent}
+  {path:'' , component : TelaInicialComponent , children : [
+      {path : 'login' , component : LoginComponent},
+      {path : 'cadastro', component : CadastroComponent},
+      {path : '' , component : LoginComponent}
+  ]}
 ];
 
 @NgModule({

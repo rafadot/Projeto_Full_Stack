@@ -9,10 +9,13 @@
                 <input type="text" formControlName="userOrEmail" placeholder="Digite seu email ou usuário" pInputText />
             </div>
 
-            <button pButton type="submit" label="Enviar" 
+            <button *ngIf="!submetido" pButton type="submit" label="Enviar" 
             class="p-button-warning" [disabled]="!cadastroHabilitado"></button>
 
+            <p-progressSpinner *ngIf="submetido" [style]="{width: '40px', height: '40px'}"></p-progressSpinner>
+            
         </form>
 
     </div>
 </body>
+<p-toast position="top-center"></p-toast>

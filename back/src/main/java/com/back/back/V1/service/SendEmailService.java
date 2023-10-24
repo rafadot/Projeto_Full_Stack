@@ -10,11 +10,11 @@ import org.springframework.stereotype.Service;
 public class SendEmailService {
     private final JavaMailSender javaMailSender;
 
-    public void teste(){
+    public void solicitaRecuperarSenha(String email, int cod){
         SimpleMailMessage message = new SimpleMailMessage();
-        message.setSubject("aaa");
-        message.setTo("rafaelamcpxd@outlook.com");
-        message.setText("blablablalba");
+        message.setSubject("Recuperação de senha");
+        message.setTo(email);
+        message.setText("Utilize esse código para recuperação de senha : " + cod);
         javaMailSender.send(message);
     }
 }
