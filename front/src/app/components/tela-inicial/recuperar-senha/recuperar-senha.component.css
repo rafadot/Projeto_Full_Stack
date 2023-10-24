@@ -31,6 +31,14 @@ input::placeholder{
     line-height: normal;
 }
 
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+
+a{
+  color: black;
+}
+
 .container{
     width: 475px;
     height: auto;
@@ -60,7 +68,24 @@ input::placeholder{
 
 .form-group{
     display: flex;
-    flex-direction: column;   
+    flex-direction: column;
     width: 100%;
     gap: 10px;
+}
+
+.codigo{
+    color: #FEAF00;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    cursor: pointer;
+}
+
+.codigo:hover{
+  color: #ffc446;
+}
+
+.codigo:active{
+  color: #c58702;
 }

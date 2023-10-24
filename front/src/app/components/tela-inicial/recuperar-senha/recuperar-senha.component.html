@@ -2,19 +2,36 @@
     <div class="container">
         <i class="pi pi-arrow-left" (click)="goLogin()"></i>
 
-        <form (ngSubmit)="submit()" [formGroup]="formModel" #formDir="ngForm">
-            
+        <form *ngIf="!formularioCod" (ngSubmit)="submit()" [formGroup]="formModelUser" #formDir="ngForm">
+
             <div class="form-group">
                 <label for="email-or-username">Digite seu email ou seu nome de usuário para recuperar a senha.</label>
                 <input type="text" formControlName="userOrEmail" placeholder="Digite seu email ou usuário" pInputText />
-            </div>
 
-            <button *ngIf="!submetido" pButton type="submit" label="Enviar" 
+                <span (click)="alteraForm()" class="codigo" >Já tenho um código</span>
+              </div>
+
+            <button *ngIf="!submetido" pButton type="submit" label="Enviar"
             class="p-button-warning" [disabled]="!cadastroHabilitado"></button>
 
             <p-progressSpinner *ngIf="submetido" [style]="{width: '40px', height: '40px'}"></p-progressSpinner>
-            
+
         </form>
+
+        <form *ngIf="formularioCod" (ngSubmit)="submit()" [formGroup]="formModelCod" #formDir="ngForm">
+
+          <div class="form-group">
+              <label for="email-or-username">Informe o código recebido por email</label>
+              <input type="number" formControlName="emailCod" placeholder="Digite seu email ou usuário" pInputText />
+
+            </div>
+
+          <button *ngIf="!submetido" pButton type="submit" label="Enviar"
+          class="p-button-warning" [disabled]="!cadastroHabilitado"></button>
+
+          <p-progressSpinner *ngIf="submetido" [style]="{width: '40px', height: '40px'}"></p-progressSpinner>
+
+      </form>
 
     </div>
 </body>

@@ -12,9 +12,12 @@ import { ToastUtilDirective } from 'src/app/shared/toast-util.directive';
   providers : [MessageService]
 })
 export class RecuperarSenhaComponent extends ToastUtilDirective implements OnInit {
-  formModel : FormGroup;
+  formModelUser : FormGroup;
+  formModelCod : FormGroup;
+
   cadastroHabilitado = true;
   submetido : boolean = false;
+  formularioCod : boolean;
 
   constructor(
     private router : Router,
@@ -23,8 +26,14 @@ export class RecuperarSenhaComponent extends ToastUtilDirective implements OnIni
   ) { super(message) }
 
   ngOnInit(): void {
-    this.formModel = new FormGroup({
+    this.formularioCod = false;
+
+    this.formModelUser = new FormGroup({
       userOrEmail : new FormControl('', Validators.required)
+    });
+
+    this.formModelCod = new FormGroup({
+      emailCod : new FormControl('', Validators.required)
     });
   }
 
@@ -33,12 +42,14 @@ export class RecuperarSenhaComponent extends ToastUtilDirective implements OnIni
   }
 
   submit() : void{
-    if(this.formModel.valid){
-      const userOrEmail = this.formModel.get('userOrEmail').value;
+    if(this.formModelUser.valid){
+      const userOrEmail = this.formModelUser.get('userOrEmail').value;
       this.submetido = true;
 
       this.loginService.solicitaNovaSenha(userOrEmail).subscribe(m=>{
-        this.toastSucess('Verifique o email da conta para obter o código para recuperar senha');
+        this.toastSucess('Email enviado com sucesso');
+        this.submetido = false;
+        this.alteraForm();
       },(error)=>{
         this.toastErro(error.error.message);
         this.submetido = false;
@@ -48,6 +59,10 @@ export class RecuperarSenhaComponent extends ToastUtilDirective implements OnIni
     }else{
       this.toastErro('Preencha o campo com email ou nome de usuário');
     }
+  }
+
+  alteraForm() : void{
+    this.formularioCod = !this.formularioCod;
   }
 
 }
