@@ -20,10 +20,4 @@ public class LoginController {
     public ResponseEntity<Map<String, String>> login(@RequestBody LoginDTO loginDTO){
         return new ResponseEntity<>(loginService.login(loginDTO), HttpStatus.OK);
     }
-
-    @GetMapping("/solicita-senha")
-    public ResponseEntity<Void> solicitaNovaSenha(@RequestParam String userOrEmail){
-        loginService.solicitaNovaSenha(userOrEmail);
-        return null;
-    }
 }

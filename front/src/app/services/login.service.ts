@@ -15,8 +15,4 @@ export class LoginService {
     const body = {username : username , senha : senha}
     return this.http.post<any>(this.apiUrl, body);
   }
-
-  solicitaNovaSenha(userOrEmail : string) : Observable<any>{
-    return this.http.get<any>(`${this.apiUrl}/solicita-senha?userOrEmail=${userOrEmail}`)
-  }
 }

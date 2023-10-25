@@ -1,37 +1,38 @@
 <body>
     <div class="container">
-        <i class="pi pi-arrow-left" (click)="goLogin()"></i>
 
-        <form *ngIf="!formularioCod" (ngSubmit)="submit()" [formGroup]="formModelUser" #formDir="ngForm">
+        <form *ngIf="formTipo == 0" (ngSubmit)="submit()" [formGroup]="formModelUser" #formDir="ngForm">
 
-            <div class="form-group">
-                <label for="email-or-username">Digite seu email ou seu nome de usuário para recuperar a senha.</label>
-                <input type="text" formControlName="userOrEmail" placeholder="Digite seu email ou usuário" pInputText />
-
-                <span (click)="alteraForm()" class="codigo" >Já tenho um código</span>
-              </div>
-
-            <button *ngIf="!submetido" pButton type="submit" label="Enviar"
-            class="p-button-warning" [disabled]="!cadastroHabilitado"></button>
-
-            <p-progressSpinner *ngIf="submetido" [style]="{width: '40px', height: '40px'}"></p-progressSpinner>
-
-        </form>
-
-        <form *ngIf="formularioCod" (ngSubmit)="submit()" [formGroup]="formModelCod" #formDir="ngForm">
+          <i class="pi pi-arrow-left" (click)="goLogin()"></i>
 
           <div class="form-group">
-              <label for="email-or-username">Informe o código recebido por email</label>
-              <input type="number" formControlName="emailCod" placeholder="Digite seu email ou usuário" pInputText />
+              <label for="email-or-username">Digite seu email ou seu nome de usuário para recuperar a senha.</label>
+              <input type="text" formControlName="userOrEmail" placeholder="Digite seu email ou usuário" pInputText />
 
+              <span (click)="solicitaoUserId()" class="codigo" >Já tenho um código</span>
             </div>
 
           <button *ngIf="!submetido" pButton type="submit" label="Enviar"
-          class="p-button-warning" [disabled]="!cadastroHabilitado"></button>
+          class="p-button-warning"></button>
 
           <p-progressSpinner *ngIf="submetido" [style]="{width: '40px', height: '40px'}"></p-progressSpinner>
 
-      </form>
+        </form>
+
+        <form *ngIf="formTipo == 1" (ngSubmit)="submit()" [formGroup]="formModelCod" #formDir="ngForm">
+
+          <i class="pi pi-arrow-left" (click)="mudaForm(0)"></i>
+
+          <div class="form-group">
+              <label for="email-or-username">Informe o código recebido por email</label>
+              <input type="number" formControlName="emailCod" placeholder="Seu código aqui" pInputText />
+
+            </div>
+
+          <button pButton type="submit" label="Ok"
+          class="p-button-warning" ></button>
+
+        </form>
 
     </div>
 </body>
