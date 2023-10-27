@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms'
+import { Router } from '@angular/router';
 import {MessageService} from 'primeng/api';
 import { LoginService } from 'src/app/services/login.service';
 import { ToastUtilDirective } from 'src/app/shared/toast-util.directive';
@@ -15,7 +16,9 @@ export class LoginComponent extends ToastUtilDirective implements OnInit {
   toggleMask : boolean;
 
   constructor(ms : MessageService,
-    private loginService : LoginService) { 
+    private loginService : LoginService,
+    private router : Router
+    ) { 
     super(ms);
   }
 
@@ -36,6 +39,9 @@ export class LoginComponent extends ToastUtilDirective implements OnInit {
       
       this.loginService.login(username, senha).subscribe(m=>{
         this.toastSucess(m.message)
+        setInterval(()=>{
+          this.router.navigate(['dashboard'])
+        }, 500)
       },(error)=>{
         this.toastErro(error.error.message);
       });

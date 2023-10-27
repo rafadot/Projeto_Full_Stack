@@ -1,5 +1,6 @@
 package com.back.back.V1.controller;
 
+import com.back.back.V1.model.dto.RecuperarSenhaDTO;
 import com.back.back.V1.model.dto.UserResponse;
 import com.back.back.V1.repository.UserRepository;
 import com.back.back.V1.model.User;
@@ -20,6 +21,12 @@ public class UserController {
     @PostMapping
     public ResponseEntity<UserResponse> create(@RequestBody User userRequest){
         return new ResponseEntity<>(userService.createUser(userRequest), HttpStatus.CREATED);
+    }
+
+    @PutMapping("/senha")
+    public ResponseEntity<Void> alteraSenha(@RequestBody RecuperarSenhaDTO dto){
+        userService.trocarSenha(dto);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
 }

@@ -1,7 +1,6 @@
 package com.back.back.V1.service;
 
-import com.back.back.V1.model.RecuperarSenha;
-import com.back.back.V1.model.dto.LoginDTO;
+import com.back.back.V1.model.dto.RecuperarSenhaDTO;
 import com.back.back.V1.model.dto.UserResponse;
 import com.back.back.V1.repository.RecuperarSenhaRepository;
 import com.back.back.V1.repository.UserRepository;
@@ -13,8 +12,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.HashMap;
-import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
@@ -38,5 +35,13 @@ public class UserService {
         BeanUtils.copyProperties(user,response);
 
         return response;
+    }
+
+    public void trocarSenha(RecuperarSenhaDTO dto){
+        User user = userRepository.findById(dto.getUserId())
+                .orElseThrow(()-> new BadRequestException("Usuário não existe"));
+
+        user.setSenha(encoder.encode(dto.getSenha()));
+        userRepository.save(user);
     }
 }

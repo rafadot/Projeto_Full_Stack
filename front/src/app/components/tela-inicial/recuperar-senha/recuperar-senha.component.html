@@ -22,12 +22,35 @@
         <form *ngIf="formTipo == 1" (ngSubmit)="submit()" [formGroup]="formModelCod" #formDir="ngForm">
 
           <i class="pi pi-arrow-left" (click)="mudaForm(0)"></i>
+          
+          <div class="form-group">
+            <label for="email-or-username">Informe o código recebido por email</label>
+            <input type="number" formControlName="emailCod" placeholder="Seu código aqui" pInputText />
+            
+          </div>
+          
+          <button pButton type="submit" label="Ok"
+          class="p-button-warning" ></button>
+          
+        </form>
+        
+        <form *ngIf="formTipo == 2" (ngSubmit)="submit()" [formGroup]="formModelSenha" #formDir="ngForm">
+
+          <i class="pi pi-times" (click)="goLogin()"></i>
+          
+          <div class="form-group">
+              <label for="senha">Nova senha</label>
+              <input type="password" formControlName="senha" placeholder="Digite sua senha" pPassword/>
+          </div>
 
           <div class="form-group">
-              <label for="email-or-username">Informe o código recebido por email</label>
-              <input type="number" formControlName="emailCod" placeholder="Seu código aqui" pInputText />
+            <label for="senha">Confirme sua senha</label>
+            <input type="password" formControlName="reSenha" placeholder="Digite sua senha novamente" pInputText/>
+          </div>
 
-            </div>
+          <div *ngIf="!senhasIgauis()">
+            <small class="p-invalid">As senhas devem ser iguais</small>
+          </div>
 
           <button pButton type="submit" label="Ok"
           class="p-button-warning" ></button>

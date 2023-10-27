@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { error } from 'console';
 import { MessageService } from 'primeng/api';
-import { LoginService } from 'src/app/services/login.service';
 import { RecuperarSenhaService } from 'src/app/services/recuperar-senha.service';
+import { UserService } from 'src/app/services/user.service';
 import { ToastUtilDirective } from 'src/app/shared/toast-util.directive';
 
 @Component({
@@ -16,6 +15,7 @@ import { ToastUtilDirective } from 'src/app/shared/toast-util.directive';
 export class RecuperarSenhaComponent extends ToastUtilDirective implements OnInit {
   formModelUser : FormGroup;
   formModelCod : FormGroup;
+  formModelSenha : FormGroup;
   submetido : boolean = false;
   userId : number;
   formTipo;
@@ -27,7 +27,8 @@ export class RecuperarSenhaComponent extends ToastUtilDirective implements OnIni
   constructor(
     private router : Router,
     private rsService : RecuperarSenhaService,
-    message : MessageService
+    message : MessageService,
+    private userService : UserService
   ) { super(message) }
 
   ngOnInit(): void {
@@ -39,6 +40,11 @@ export class RecuperarSenhaComponent extends ToastUtilDirective implements OnIni
 
     this.formModelCod = new FormGroup({
       emailCod : new FormControl('', Validators.required)
+    });
+
+    this.formModelSenha = new FormGroup({
+      senha : new FormControl('', Validators.required),
+      reSenha : new FormControl('', Validators.required)
     });
   }
 
@@ -80,6 +86,7 @@ export class RecuperarSenhaComponent extends ToastUtilDirective implements OnIni
         this.rsService.codeValido(this.userId, emailCode).subscribe(m=>{
           if(m){
             this.toastSucess('Código válido');
+            this.formTipo = RecuperarSenhaComponent.TIPO_FORM_SENHA;
           }
         },(error)=>{
           this.toastErro(error.error.message)
@@ -87,6 +94,19 @@ export class RecuperarSenhaComponent extends ToastUtilDirective implements OnIni
       }else{
         this.toastErro('Preencha o campo para verificação com valores válidos');
       }
+    }
+
+    if(this.formTipo == RecuperarSenhaComponent.TIPO_FORM_SENHA && this.senhasIgauis()){
+      this.userService.alteraSenha(this.userId , this.formModelSenha.get('senha').value)
+      .subscribe(()=>{
+        this.toastSucess('Senha alterada com sucesso')
+
+        setTimeout(() => {
+          this.goLogin();
+        }, 1000);
+      },(error)=>{
+        this.toastErro(error.error.message);
+      });
     }
     
   }
@@ -100,12 +120,19 @@ export class RecuperarSenhaComponent extends ToastUtilDirective implements OnIni
       this.rsService.retornaUserId(this.formModelUser.get('userOrEmail').value).subscribe(m=>{
         this.userId = m;
         this.formTipo = RecuperarSenhaComponent.TIPO_FORM_CODE;
-        
       },(error)=>{
         this.toastErro(error.error.message)
       });
     }else{
         this.toastErro('Preencha o campo com email ou nome de usuário');
     }
+  }
+
+  
+  senhasIgauis() : boolean {
+    const senha : string = this.formModelSenha.get('senha').value;
+    const reSenha : string = this.formModelSenha.get('reSenha').value;
+
+    return senha === reSenha;
   }
 }

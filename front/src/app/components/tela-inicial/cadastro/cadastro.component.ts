@@ -61,7 +61,7 @@ export class CadastroComponent extends ToastUtilDirective implements OnInit {
 
         setTimeout(() => {
           this.goLogin();
-        }, 2000);
+        }, 500);
       },(error)=>{
         console.log(error)
         this.toastErro(error.error.message);

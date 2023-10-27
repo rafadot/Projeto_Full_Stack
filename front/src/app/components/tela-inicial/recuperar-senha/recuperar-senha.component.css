@@ -51,13 +51,13 @@ a{
     box-shadow: 2px 5px 10px 0px rgba(0, 0, 0, 0.10);
 }
 
-.pi-arrow-left{
+.pi-arrow-left , .pi-times{
     margin-right: 90%;
     font-size: 1.5rem;
     cursor: pointer;
 }
 
-.pi-arrow-left:hover{
+.pi-arrow-left:hover, .pi-times:hover{
     color: #F8D442;
 }
 

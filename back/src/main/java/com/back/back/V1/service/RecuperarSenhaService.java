@@ -46,7 +46,7 @@ public class RecuperarSenhaService {
         RecuperarSenha recuperarSenha = recuperarSenhaRepository.findByUserId(userId)
                 .orElseThrow(()-> new BadRequestException("Usuário não existe"));
 
-        if(ChronoUnit.MINUTES.between(recuperarSenha.getExpircao() , LocalDateTime.now()) > 5){
+        if(ChronoUnit.MINUTES.between(LocalDateTime.now() ,recuperarSenha.getExpircao()) > 5){
             throw new BadRequestException("Este código já expirou");
         }
 
