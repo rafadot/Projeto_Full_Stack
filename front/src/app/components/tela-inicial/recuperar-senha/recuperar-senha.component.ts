@@ -1,18 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { MessageService } from 'primeng/api';
 import { RecuperarSenhaService } from 'src/app/services/recuperar-senha.service';
-import { UserService } from 'src/app/services/user.service';
 import { ToastUtilDirective } from 'src/app/shared/toast-util.directive';
 
 @Component({
   selector: 'app-recuperar-senha',
   templateUrl: './recuperar-senha.component.html',
-  styleUrls: ['./recuperar-senha.component.css'],
-  providers : [MessageService]
+  styleUrls: ['./recuperar-senha.component.css']
 })
-export class RecuperarSenhaComponent extends ToastUtilDirective implements OnInit {
+export class RecuperarSenhaComponent implements OnInit {
   formModelUser : FormGroup;
   formModelCod : FormGroup;
   formModelSenha : FormGroup;
@@ -27,9 +24,8 @@ export class RecuperarSenhaComponent extends ToastUtilDirective implements OnIni
   constructor(
     private router : Router,
     private rsService : RecuperarSenhaService,
-    message : MessageService,
-    private userService : UserService
-  ) { super(message) }
+    private toasUtil : ToastUtilDirective
+  ) { }
 
   ngOnInit(): void {
     this.formTipo = RecuperarSenhaComponent.TIPO_FORM_USER_EMAIL;
@@ -63,18 +59,18 @@ export class RecuperarSenhaComponent extends ToastUtilDirective implements OnIni
         this.rsService.solicitaNovaSenha(userOrEmail).subscribe(m=>{
           this.userId = m;
 
-          this.toastSucess('Email enviado com sucesso');
+          this.toasUtil.toastSucess('Email enviado com sucesso');
           this.submetido = false;
 
           this.formTipo = RecuperarSenhaComponent.TIPO_FORM_CODE;
   
         },(error)=>{
-          this.toastErro(error.error.message);
+          this.toasUtil.toastErro(error.error.message);
           this.submetido = false;
         });
   
       }else{
-        this.toastErro('Preencha o campo com email ou nome de usuário');
+        this.toasUtil.toastErro('Preencha o campo com email ou nome de usuário');
       }
     }
 
@@ -85,27 +81,26 @@ export class RecuperarSenhaComponent extends ToastUtilDirective implements OnIni
       if(this.formModelCod.valid && tamanhoCode== 6){
         this.rsService.codeValido(this.userId, emailCode).subscribe(m=>{
           if(m){
-            this.toastSucess('Código válido');
+            this.toasUtil.toastSucess('Código válido');
             this.formTipo = RecuperarSenhaComponent.TIPO_FORM_SENHA;
           }
         },(error)=>{
-          this.toastErro(error.error.message)
+          this.toasUtil.toastErro(error.error.message)
         });
       }else{
-        this.toastErro('Preencha o campo para verificação com valores válidos');
+        this.toasUtil.toastErro('Preencha o campo para verificação com valores válidos');
       }
     }
 
     if(this.formTipo == RecuperarSenhaComponent.TIPO_FORM_SENHA && this.senhasIgauis()){
-      this.userService.alteraSenha(this.userId , this.formModelSenha.get('senha').value)
-      .subscribe(()=>{
-        this.toastSucess('Senha alterada com sucesso')
+      const senha = this.formModelSenha.get('senha').value;
+      const code = this.formModelCod.get('emailCod').value;
 
-        setTimeout(() => {
-          this.goLogin();
-        }, 1000);
+      this.rsService.alteraSenha(this.userId , senha , code)
+      .subscribe(()=>{
+        this.toasUtil.toastSucess('Senha alterada com sucesso')
       },(error)=>{
-        this.toastErro(error.error.message);
+        this.toasUtil.toastErro(error.error.message);
       });
     }
     
@@ -121,10 +116,10 @@ export class RecuperarSenhaComponent extends ToastUtilDirective implements OnIni
         this.userId = m;
         this.formTipo = RecuperarSenhaComponent.TIPO_FORM_CODE;
       },(error)=>{
-        this.toastErro(error.error.message)
+        this.toasUtil.toastErro(error.error.message)
       });
     }else{
-        this.toastErro('Preencha o campo com email ou nome de usuário');
+        this.toasUtil.toastErro('Preencha o campo com email ou nome de usuário');
     }
   }
 

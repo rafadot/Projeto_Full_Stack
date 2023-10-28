@@ -1,7 +1,8 @@
 package com.back.back.V1.service;
 
 import com.back.back.V1.model.RecuperarSenha;
-import com.back.back.V1.model.User;
+import com.back.back.V1.model.UserApp;
+import com.back.back.V1.model.dto.RecuperarSenhaDTO;
 import com.back.back.V1.repository.RecuperarSenhaRepository;
 import com.back.back.V1.repository.UserRepository;
 import com.back.back.exceptions.BadRequestException;
@@ -18,9 +19,10 @@ public class RecuperarSenhaService {
     private final UserRepository userRepository;
     private final SendEmailService sendEmailService;
     private final RecuperarSenhaRepository recuperarSenhaRepository;
+    private final UserService userService;
 
     public Long solicitaNovaSenha(String userOrEmail){
-        User user = userRepository.findByUsername(userOrEmail).orElse(null);
+        UserApp user = userRepository.findByUsername(userOrEmail).orElse(null);
 
         if(user == null){
             user = userRepository.findByEmail(userOrEmail).orElseThrow(()-> new BadRequestException("Usuário ou email não cadastrados"));
@@ -46,7 +48,7 @@ public class RecuperarSenhaService {
         RecuperarSenha recuperarSenha = recuperarSenhaRepository.findByUserId(userId)
                 .orElseThrow(()-> new BadRequestException("Usuário não existe"));
 
-        if(ChronoUnit.MINUTES.between(LocalDateTime.now() ,recuperarSenha.getExpircao()) > 5){
+        if(LocalDateTime.now().isAfter(recuperarSenha.getExpircao())){
             throw new BadRequestException("Este código já expirou");
         }
 
@@ -58,12 +60,18 @@ public class RecuperarSenhaService {
     }
 
     public Long retornaIdPeloNome(String userOrEmail){
-        User user = userRepository.findByUsername(userOrEmail).orElse(null);
+        UserApp user = userRepository.findByUsername(userOrEmail).orElse(null);
 
         if(user == null){
             user = userRepository.findByEmail(userOrEmail).orElseThrow(()-> new BadRequestException("Usuário ou email não cadastrados"));
         }
 
         return user.getId();
+    }
+
+    public void trocarSenha(RecuperarSenhaDTO dto){
+        if(codigoValido(dto.getUserId(), dto.getCode())){
+            userService.trocarSenha(dto);
+        }
     }
 }

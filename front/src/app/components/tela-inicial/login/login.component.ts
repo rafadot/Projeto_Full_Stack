@@ -1,26 +1,23 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms'
 import { Router } from '@angular/router';
-import {MessageService} from 'primeng/api';
 import { LoginService } from 'src/app/services/login.service';
 import { ToastUtilDirective } from 'src/app/shared/toast-util.directive';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css'],
-  providers : [MessageService]
+  styleUrls: ['./login.component.css']
 })
-export class LoginComponent extends ToastUtilDirective implements OnInit {
+export class LoginComponent implements OnInit {
 
   toggleMask : boolean;
 
-  constructor(ms : MessageService,
+  constructor(
     private loginService : LoginService,
-    private router : Router
-    ) { 
-    super(ms);
-  }
+    private router : Router,
+    private toastUtil : ToastUtilDirective
+    ) {}
 
   ngOnInit(): void {
     this.formModel = new FormGroup({
@@ -38,16 +35,14 @@ export class LoginComponent extends ToastUtilDirective implements OnInit {
       const senha = this.formModel.get('password').value;
       
       this.loginService.login(username, senha).subscribe(m=>{
-        this.toastSucess(m.message)
-        setInterval(()=>{
-          this.router.navigate(['dashboard'])
-        }, 500)
+        this.toastUtil.toastSucess(m.message)
+        this.router.navigate(['dashboard'])
       },(error)=>{
-        this.toastErro(error.error.message);
+        this.toastUtil.toastErro(error.error.message);
       });
 
     }else{
-      this.toastErro('Erro ao efetuar o login', 'Preencha todos os campos para realizar o login');
+      this.toastUtil.toastErro('Erro ao efetuar o login', 'Preencha todos os campos para realizar o login');
     }
   }
 }

@@ -12,7 +12,7 @@ export class LoginService {
   constructor(private http : HttpClient) { }
 
   login(username : string, senha : string) : Observable<any>{
-    const body = {username : username , senha : senha}
+    const body = {usernameOrEmail : username , senha : senha}
     return this.http.post<any>(this.apiUrl, body);
   }
 }

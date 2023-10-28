@@ -6,4 +6,5 @@ import lombok.Data;
 public class RecuperarSenhaDTO {
     private Long userId;
     private String senha;
+    private Integer code;
 }

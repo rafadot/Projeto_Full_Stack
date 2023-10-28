@@ -1,6 +1,5 @@
 package com.back.back.V1.model;
 
-import lombok.Builder;
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -20,5 +19,5 @@ public class RecuperarSenha {
 
     @OneToOne
     @JoinColumn(name = "user_app_id")
-    private User user;
+    private UserApp user;
 }

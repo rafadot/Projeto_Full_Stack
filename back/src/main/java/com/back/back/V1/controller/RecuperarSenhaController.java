@@ -1,13 +1,11 @@
 package com.back.back.V1.controller;
 
+import com.back.back.V1.model.dto.RecuperarSenhaDTO;
 import com.back.back.V1.service.RecuperarSenhaService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/recuperar-senha")
@@ -28,5 +26,11 @@ public class RecuperarSenhaController {
     @GetMapping("/retorna-id")
     public ResponseEntity<Long> retornaIdPeloNome(@RequestParam String userOrEmail){
         return new ResponseEntity<>(recuperarSenhaService.retornaIdPeloNome(userOrEmail), HttpStatus.OK);
+    }
+
+    @PutMapping("/senha")
+    public ResponseEntity<Void> trocaSenha(@RequestBody RecuperarSenhaDTO recuperarSenhaDTO){
+        recuperarSenhaService.trocarSenha(recuperarSenhaDTO);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }

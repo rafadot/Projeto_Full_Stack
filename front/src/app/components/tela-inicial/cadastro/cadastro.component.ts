@@ -9,11 +9,10 @@ import { ToastUtilDirective } from 'src/app/shared/toast-util.directive';
 @Component({
   selector: 'app-cadastro',
   templateUrl: './cadastro.component.html',
-  styleUrls: ['./cadastro.component.css'],
-  providers : [MessageService]
+  styleUrls: ['./cadastro.component.css']
 
 })
-export class CadastroComponent extends ToastUtilDirective implements OnInit {
+export class CadastroComponent implements OnInit {
 
   formModel : FormGroup;
   confirmPassword : string = '';
@@ -22,12 +21,10 @@ export class CadastroComponent extends ToastUtilDirective implements OnInit {
   cadastroHabilitado : boolean = true;
 
   constructor(
-    messageService : MessageService,
     private router : Router,
-    private userService : UserService
-    ) { 
-    super(messageService)
-  }
+    private userService : UserService,
+    private toastUtil : ToastUtilDirective
+    ) {}
 
   ngOnInit(): void {
     this.formModel = new FormGroup({
@@ -43,7 +40,7 @@ export class CadastroComponent extends ToastUtilDirective implements OnInit {
     if(this.formModel.valid){
 
       if(!this.senhasIgauis()){
-        this.toastErro('As senhas devem ser iguais');
+        this.toastUtil.toastErro('As senhas devem ser iguais');
         return;
       }
 
@@ -57,18 +54,15 @@ export class CadastroComponent extends ToastUtilDirective implements OnInit {
 
       this.userService.create(this.user).subscribe(()=>{
         this.cadastroHabilitado = false;
-        this.toastSucess('Cadastro realizado com sucesso');
-
-        setTimeout(() => {
-          this.goLogin();
-        }, 500);
+        this.toastUtil.toastSucess('Cadastro realizado com sucesso');
+        this.router.navigate(['login']);
       },(error)=>{
         console.log(error)
-        this.toastErro(error.error.message);
+        this.toastUtil.toastErro(error.error.message);
       });
 
     }else{
-      this.toastErro('Preencha todos os campos');
+      this.toastUtil.toastErro('Preencha todos os campos');
     }
   }
 

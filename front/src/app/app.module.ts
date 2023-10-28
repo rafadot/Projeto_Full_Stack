@@ -12,18 +12,19 @@ import {FormsModule , ReactiveFormsModule} from '@angular/forms'
 import {ToastModule} from 'primeng/toast';
 import { ToastUtilDirective } from './shared/toast-util.directive';
 import {PasswordModule} from 'primeng/password';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { RecuperarSenhaComponent } from './components/tela-inicial/recuperar-senha/recuperar-senha.component';
 import {ProgressSpinnerModule} from 'primeng/progressspinner';
 import { TelaInicialComponent } from './components/tela-inicial/tela-inicial.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { ErrorInterceptador } from './shared/ErrorInterceptador';
+import { MessageService } from 'primeng/api';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     CadastroComponent,
-    ToastUtilDirective,
     RecuperarSenhaComponent,
     TelaInicialComponent,
     DashboardComponent
@@ -41,7 +42,15 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
     HttpClientModule,
     ProgressSpinnerModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide : HTTP_INTERCEPTORS,
+      useClass : ErrorInterceptador,
+      multi : true
+    },
+    MessageService,
+    ToastUtilDirective
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -20,11 +20,4 @@ export class UserService {
     return this.http.post<User>(this.apiUrl, user);
   }
 
-  alteraSenha(userId : number, senha : string) : Observable<any>{
-    const data = {
-      userId : userId,
-      senha : senha
-    }
-    return this.http.put<any>(`${this.apiUrl}/senha?` , data);
-  }
 }

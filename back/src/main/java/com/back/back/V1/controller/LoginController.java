@@ -17,7 +17,7 @@ public class LoginController {
     private final LoginService loginService;
 
     @PostMapping
-    public ResponseEntity<Map<String, String>> login(@RequestBody LoginDTO loginDTO){
+    public ResponseEntity<Map<String,String>> login(@RequestBody LoginDTO loginDTO){
         return new ResponseEntity<>(loginService.login(loginDTO), HttpStatus.OK);
     }
 }

@@ -22,4 +22,15 @@ export class RecuperarSenhaService {
   retornaUserId(userOrEmail : string) : Observable<number>{
     return this.http.get<number>(`${this.apiUrl}/retorna-id?userOrEmail=${userOrEmail}`)
   }
+
+  alteraSenha(userId : number, senha : string, code : number) : Observable<any>{
+    const data = {
+      userId : userId,
+      senha : senha,
+      code : code
+    }
+
+    console.log(data)
+    return this.http.put<any>(`${this.apiUrl}/senha?` , data);
+  }
 }
