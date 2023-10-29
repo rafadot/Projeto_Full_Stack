@@ -9,6 +9,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
+import java.util.Map;
+
 @RestController
 @RequestMapping("/user")
 @RequiredArgsConstructor
@@ -24,6 +27,13 @@ public class UserController {
     public ResponseEntity<Void> alteraSenha(@RequestBody RecuperarSenhaDTO dto){
         userService.trocarSenha(dto);
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @GetMapping("/privada")
+    public ResponseEntity<Map<String,String>> p(){
+        Map<String,String> resp = new HashMap<>();
+        resp.put("message","privada");
+        return new ResponseEntity<>(resp,HttpStatus.OK);
     }
 
 }

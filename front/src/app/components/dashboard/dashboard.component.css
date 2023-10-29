@@ -1,50 +1,16 @@
 body{
-    background-color: #fdfdfd;
-    width: 100vw;
-    height: 2000px;
-}
-
-.pi-chevron-circle-right{
-    font-size: 20px;
-    cursor: pointer;
-}
-
-.pi-chevron-circle-right:hover{
-    color: #F8D442;
-}
-
-.pi-chevron-circle-right:active{
-    color: #a1892a;
-}
-
-.expandida{
-    width: 20%;
-    height: 100vh;
-    background-color: #f2eae1;
-
-    position: fixed;
-    top: 0;
-    left: 0;
-
     display: flex;
-    justify-content: left;
-
-    padding: 20px 30px 20px 30px;
-    transition: 500ms;
+    flex-direction: row;
 }
 
-.contraida{
-    width: 5%;
-    height: 100vh;
-    background-color: #f2eae1;
+.content{
+    margin-left: var(--app-menu-width);
+    width: 100%;
+    transition: var(--app-menu-transition);
+}
 
-    position: fixed;
-    top: 0;
-    left: 0;
-
-    display: flex;
-    justify-content: left;
-
-    padding: 20px 30px 20px 30px;
-    transition: 500ms;
+.content-c{
+    margin-left: var(--app-menu-c-width);
+    width: 100%;
+    transition: var(--app-menu-transition);
 }

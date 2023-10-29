@@ -8,3 +8,13 @@
     font-family: Montserrat;
     font-style: normal;
 }
+
+li{
+    list-style: none;
+}
+
+:root {
+    --app-menu-width: 18%;
+    --app-menu-c-width : 5%;
+    --app-menu-transition : 500ms;
+}

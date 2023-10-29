@@ -19,6 +19,8 @@ import { TelaInicialComponent } from './components/tela-inicial/tela-inicial.com
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { ErrorInterceptador } from './shared/ErrorInterceptador';
 import { MessageService } from 'primeng/api';
+import { MenuComponent } from './components/dashboard/menu/menu.component';
+import { HeaderPageComponent } from './components/dashboard/header-page/header-page.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +29,9 @@ import { MessageService } from 'primeng/api';
     CadastroComponent,
     RecuperarSenhaComponent,
     TelaInicialComponent,
-    DashboardComponent
+    DashboardComponent,
+    MenuComponent,
+    HeaderPageComponent
   ],
   imports: [
     BrowserModule,

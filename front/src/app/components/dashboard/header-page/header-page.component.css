@@ -1,0 +1,14 @@
+.pi-chevron-circle-left, .pi-chevron-circle-right{
+    color: #c4c4c4;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.controla-nav{
+    padding: 21px 30px 21px 30px;
+}
+
+body{
+    box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.25);
+    width: 100%;
+}

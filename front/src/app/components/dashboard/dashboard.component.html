@@ -1,5 +1,11 @@
 <body>
-    <nav [ngClass]="classeNav" (click)="alteraNav()">
-        <i class="pi pi-chevron-circle-right"></i>
-    </nav>
+    <div>
+        <app-menu [nome]="nome" [username]="username"></app-menu>
+    </div>
+
+    <div class="content" [ngClass]="{'content' : !navContraida , 'content-c' : navContraida}">
+        <app-header-page></app-header-page>
+    </div>
+    
+    <router-outlet></router-outlet>
 </body>
