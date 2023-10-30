@@ -74,7 +74,7 @@ h1{
 
 .profile h3{
     color: #FEAF00;
-    font-size: 14px;
+    font-size: 100%;
     font-style: normal;
     font-weight: 500;
     margin-bottom: 80px;
@@ -83,6 +83,47 @@ h1{
 i{
     font-size: 16px;
     color: black;
+}
+
+.pi-upload{
+    rotate: 90deg;
+}
+
+footer span{
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    cursor: pointer;
+    background: none;
+    border: none;
+}
+
+.footer{
+    cursor: pointer;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    position: absolute;
+    top: 90%;
+
+    transition: var(--app-menu-transition);
+}
+
+.footer-c{
+    cursor: pointer;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    position: absolute;
+    top: 90%;
+    left: 40%;
+
+    transition: var(--app-menu-transition);
 }
 
 .itens-menu span{
@@ -100,8 +141,22 @@ i{
     user-select: none;
 }
 
-ul{
+.itens-menu-c{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    user-select: none;
+}
+
+.ul{
     width: 70%;
+    transition: var(--app-menu-transition);
+}
+
+.ul-c{
+    width: 100%;
+    transition: var(--app-menu-transition);
 }
 
 li{
@@ -113,6 +168,18 @@ a{
     align-items: center;
     justify-content: start;
     padding-left: 15%;
+    gap : 15px;
+    border-radius: 4px;
+    /* background: #FEAF00; */
+    height: 41px;
+    cursor: pointer;
+}
+
+.a-c{
+    display: flex;
+    align-items: center;
+    justify-content: center !important;
+    padding-left: 0px !important;
     gap : 15px;
     border-radius: 4px;
     /* background: #FEAF00; */

@@ -1,5 +1,7 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { User } from 'src/app/model/User';
 import { EventServiceService } from 'src/app/services/event-service.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -10,7 +12,8 @@ export class DashboardComponent implements OnInit {
 
   constructor(
     private eventService : EventServiceService,
-    private cdr : ChangeDetectorRef
+    private cdr : ChangeDetectorRef,
+    private userService : UserService
     ) { }
 
   ngOnInit(): void {
@@ -18,9 +21,15 @@ export class DashboardComponent implements OnInit {
       this.navContraida = m;
       this.cdr.detectChanges();
     });
+
+    this.userService.userLogado().subscribe(m=>{
+      this.user = m;
+      console.log(this.user);
+    });
+
   }
 
-  nome : string = 'Rafael Aires';
-  username : string = 'rafadot';
+  user = new User();
   navContraida : boolean;
+
 }

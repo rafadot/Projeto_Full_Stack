@@ -30,7 +30,6 @@ export class RecuperarSenhaService {
       code : code
     }
 
-    console.log(data)
     return this.http.put<any>(`${this.apiUrl}/senha?` , data);
   }
 }

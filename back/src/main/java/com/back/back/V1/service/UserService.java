@@ -8,6 +8,8 @@ import com.back.back.exceptions.BadRequestException;
 import com.back.back.V1.model.UserApp;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -52,5 +54,16 @@ public class UserService {
             user = userRepository.findByEmail(userEmail).orElseThrow(()->new BadRequestException("Usuário ou email não cadastrados"));
 
         return user;
+    }
+
+    public UserApp userLogado(){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        if(authentication != null && !authentication.isAuthenticated())
+            throw new BadRequestException("Sua sessão expirou. Por favor faça o login novamente!");
+
+        return userRepository
+                .findByUsername(authentication.getName())
+                .orElseThrow(()-> new BadRequestException("Usuário não cadastrado"));
     }
 }

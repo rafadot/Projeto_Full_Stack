@@ -20,4 +20,9 @@ public class LoginController {
     public ResponseEntity<Map<String,String>> login(@RequestBody LoginDTO loginDTO){
         return new ResponseEntity<>(loginService.login(loginDTO), HttpStatus.OK);
     }
+
+    @GetMapping
+    public ResponseEntity<Boolean> estaAutenticado(@RequestParam String token){
+        return new ResponseEntity<>(loginService.estaAutenticado(token) , HttpStatus.OK);
+    }
 }

@@ -6,19 +6,25 @@
 
     <div class="profile">
         <img src="assets/avatar/1.svg" alt="avatar">
-        <h2>{{nome}}</h2>
+        <h2 *ngIf="!navContraida" >{{nome}}</h2>
         <h3>{{username}}</h3>
     </div>
 
-    <div class="itens-menu">
-        <ul>
+    <div [ngClass]="{'itens-menu' : !navContraida, 'itens-menu-c' : navContraida}">
+        <ul [ngClass]="{'ul' : !navContraida, 'ul-c' : navContraida}">
             <li *ngFor="let item of menuItens">
-                <a [ngClass]="{'itemSelecionado': item.selecionado}" (click)="selecionaItem(item)">
+                <a [ngClass]="{'itemSelecionado': item.selecionado , 'a-c' : navContraida}" 
+                (click)="selecionaItem(item)">
                     <i class={{item.icone}}></i>
-                    <span>{{item.texto}}</span>
+                    <span *ngIf="!navContraida" >{{item.texto}}</span>
                 </a>
             </li>
         </ul>
     </div>
+
+    <footer [ngClass]="{'footer' : !navContraida, 'footer-c' : navContraida}" (click)="logout()">
+        <span *ngIf="!navContraida" >Sair</span>
+        <i class="pi pi-upload"></i>
+    </footer>
 
 </body>

@@ -17,10 +17,11 @@ import { RecuperarSenhaComponent } from './components/tela-inicial/recuperar-sen
 import {ProgressSpinnerModule} from 'primeng/progressspinner';
 import { TelaInicialComponent } from './components/tela-inicial/tela-inicial.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
-import { ErrorInterceptador } from './shared/ErrorInterceptador';
 import { MessageService } from 'primeng/api';
 import { MenuComponent } from './components/dashboard/menu/menu.component';
 import { HeaderPageComponent } from './components/dashboard/header-page/header-page.component';
+import { ErrorInterceptador } from './shared/ErrorInterceptador';
+import { JwtInterceptador } from './shared/JwtInterceptador';
 
 @NgModule({
   declarations: [
@@ -50,6 +51,11 @@ import { HeaderPageComponent } from './components/dashboard/header-page/header-p
     {
       provide : HTTP_INTERCEPTORS,
       useClass : ErrorInterceptador,
+      multi : true
+    },
+    {
+      provide : HTTP_INTERCEPTORS,
+      useClass : JwtInterceptador,
       multi : true
     },
     MessageService,

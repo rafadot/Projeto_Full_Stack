@@ -15,4 +15,12 @@ export class LoginService {
     const body = {usernameOrEmail : username , senha : senha}
     return this.http.post<any>(this.apiUrl, body);
   }
+
+  estaAutenticado(token : string) : Observable<boolean>{
+    return this.http.get<boolean>(`${this.apiUrl}?token=${token}`);
+  }
+
+  logout(){
+    localStorage.removeItem('token');
+  }
 }

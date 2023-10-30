@@ -1,10 +1,13 @@
 <body>
     <div>
-        <app-menu [nome]="nome" [username]="username"></app-menu>
+        <app-menu [nome]="user.nome" [username]="user.username"></app-menu>
     </div>
 
     <div class="content" [ngClass]="{'content' : !navContraida , 'content-c' : navContraida}">
-        <app-header-page></app-header-page>
+
+        <div class="header">
+            <app-header-page></app-header-page>
+        </div>
     </div>
     
     <router-outlet></router-outlet>

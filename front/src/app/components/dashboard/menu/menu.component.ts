@@ -1,5 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { EventServiceService } from 'src/app/services/event-service.service';
+import { LoginService } from 'src/app/services/login.service';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -11,7 +13,9 @@ export class MenuComponent implements OnInit {
 
   constructor(
     private userService : UserService,
-    private eventService : EventServiceService
+    private eventService : EventServiceService,
+    private loginService : LoginService,
+    private router : Router
     ) { }
 
   ngOnInit(): void {
@@ -23,7 +27,7 @@ export class MenuComponent implements OnInit {
 
   menuItens = [
     {texto : 'Home', icone : 'pi pi-home' , selecionado : true},
-    {texto : 'Financeiro', icone : 'pi pi-dollar', selecionado : false}
+    {texto : 'Financeiro', icone : 'pi pi-dollar', selecionado : false},
   ];
 
   navContraida : boolean;
@@ -37,5 +41,9 @@ export class MenuComponent implements OnInit {
     item.selecionado = true;
   }
 
+  logout() : void{
+    this.loginService.logout();
+    this.router.navigate(['login'])
+  }
 
 }

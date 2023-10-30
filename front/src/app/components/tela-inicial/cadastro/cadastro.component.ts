@@ -57,7 +57,6 @@ export class CadastroComponent implements OnInit {
         this.toastUtil.toastSucess('Cadastro realizado com sucesso');
         this.router.navigate(['login']);
       },(error)=>{
-        console.log(error)
         this.toastUtil.toastErro(error.error.message);
       });
 

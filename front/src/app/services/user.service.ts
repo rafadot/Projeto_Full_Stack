@@ -23,4 +23,8 @@ export class UserService {
   privada() : Observable<any>{
     return this.http.get<any>(`${this.apiUrl}/privada`)
   }
+
+  userLogado() : Observable<User>{
+    return this.http.get<User>(`${this.apiUrl}/logado`)
+  }
 }

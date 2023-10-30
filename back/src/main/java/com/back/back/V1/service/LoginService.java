@@ -39,4 +39,8 @@ public class LoginService {
         return response;
     }
 
+    public Boolean estaAutenticado(String token){
+        return jwtService.tokenValido(token);
+    }
+
 }

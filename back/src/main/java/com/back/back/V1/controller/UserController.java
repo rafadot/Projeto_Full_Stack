@@ -5,12 +5,10 @@ import com.back.back.V1.model.dto.UserAppResponse;
 import com.back.back.V1.model.UserApp;
 import com.back.back.V1.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.BeanUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.HashMap;
-import java.util.Map;
 
 @RestController
 @RequestMapping("/user")
@@ -29,11 +27,13 @@ public class UserController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @GetMapping("/privada")
-    public ResponseEntity<Map<String,String>> p(){
-        Map<String,String> resp = new HashMap<>();
-        resp.put("message","privada");
-        return new ResponseEntity<>(resp,HttpStatus.OK);
+    @GetMapping("/logado")
+    public ResponseEntity<UserAppResponse> userLogado(){
+        UserApp user = userService.userLogado();
+        UserAppResponse response = new UserAppResponse();
+        BeanUtils.copyProperties(user,response);
+
+        return new ResponseEntity<>(response,HttpStatus.OK);
     }
 
 }

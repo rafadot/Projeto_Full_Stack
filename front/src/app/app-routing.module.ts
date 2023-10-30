@@ -5,6 +5,7 @@ import { LoginComponent } from './components/tela-inicial/login/login.component'
 import { CadastroComponent } from './components/tela-inicial/cadastro/cadastro.component';
 import { RecuperarSenhaComponent } from './components/tela-inicial/recuperar-senha/recuperar-senha.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { AuthGuardGuard } from './auth-guard.guard';
 
 const routes: Routes = [
   {path:'' , component : TelaInicialComponent , children : [
@@ -13,7 +14,7 @@ const routes: Routes = [
       {path : '' , component : LoginComponent},
       {path : 'recuperar-senha' , component : RecuperarSenhaComponent}
   ]},
-  {path : 'dashboard' , component : DashboardComponent}
+  {path : 'dashboard' , component : DashboardComponent , canActivate : [AuthGuardGuard]}
 ];
 
 @NgModule({

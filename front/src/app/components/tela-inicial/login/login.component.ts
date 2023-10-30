@@ -35,6 +35,8 @@ export class LoginComponent implements OnInit {
       const senha = this.formModel.get('password').value;
       
       this.loginService.login(username, senha).subscribe(m=>{
+        localStorage.setItem('token',m.token);
+
         this.toastUtil.toastSucess(m.message)
         this.router.navigate(['dashboard'])
       },(error)=>{
