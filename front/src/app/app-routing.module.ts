@@ -6,6 +6,7 @@ import { CadastroComponent } from './components/tela-inicial/cadastro/cadastro.c
 import { RecuperarSenhaComponent } from './components/tela-inicial/recuperar-senha/recuperar-senha.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { AuthGuardGuard } from './auth-guard.guard';
+import { FinanceiroComponent } from './components/dashboard/financeiro/financeiro.component';
 
 const routes: Routes = [
   {path:'' , component : TelaInicialComponent , children : [
@@ -14,7 +15,9 @@ const routes: Routes = [
       {path : '' , component : LoginComponent},
       {path : 'recuperar-senha' , component : RecuperarSenhaComponent}
   ]},
-  {path : 'dashboard' , component : DashboardComponent , canActivate : [AuthGuardGuard]}
+  {path : 'dashboard' , component : DashboardComponent , canActivate : [AuthGuardGuard] , children : [
+    {path : 'financeiro', component : FinanceiroComponent}
+  ]}
 ];
 
 @NgModule({

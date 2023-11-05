@@ -17,6 +17,7 @@ export class DashboardComponent implements OnInit {
     ) { }
 
   ngOnInit(): void {
+
     this.eventService.alteraNavbar.subscribe(m=>{
       this.navContraida = m;
       this.cdr.detectChanges();
@@ -24,7 +25,6 @@ export class DashboardComponent implements OnInit {
 
     this.userService.userLogado().subscribe(m=>{
       this.user = m;
-      console.log(this.user);
     });
 
   }

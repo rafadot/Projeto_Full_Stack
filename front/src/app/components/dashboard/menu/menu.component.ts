@@ -16,29 +16,46 @@ export class MenuComponent implements OnInit {
     private eventService : EventServiceService,
     private loginService : LoginService,
     private router : Router
-    ) { }
+  ) { }
+
+  navContraida : boolean;
 
   ngOnInit(): void {
     this.eventService.alteraNavbar.subscribe(m=>this.navContraida = m);
+
+
+    //Define o item selecionado no menu
+    const rotaAtual = this.router.url.split('/dashboard/')[1];
+
+    if(!rotaAtual){
+      this.menuItens[0].selecionado = true;
+    }else{
+      this.menuItens.forEach(item =>{
+        if(item.key === rotaAtual){
+          item.selecionado = true;
+        }
+      });
+    }
+    //fim
+    
   }
 
   @Input() nome : string;
   @Input() username : string;
 
   menuItens = [
-    {texto : 'Home', icone : 'pi pi-home' , selecionado : true},
-    {texto : 'Financeiro', icone : 'pi pi-dollar', selecionado : false},
+    {texto : 'Home', icone : 'pi pi-home' , selecionado : false, key : ''},
+    {texto : 'Financeiro', icone : 'pi pi-dollar', selecionado : false, key : 'financeiro'},
   ];
 
-  navContraida : boolean;
-
   privada(){
-    this.userService.privada().subscribe(m=>console.log(m.message));
+    this.userService.privada().subscribe();
   }
 
   selecionaItem(item : any) : void{
     this.menuItens.forEach(i=>i.selecionado = false);
     item.selecionado = true;
+    this.router.navigate([`dashboard/${item.key}`])
   }
 
   logout() : void{
