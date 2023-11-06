@@ -1,0 +1,40 @@
+<body>
+    <form (ngSubmit)="submit()" [formGroup]="formModel" #formDir="ngForm">
+        
+        <div class="form-group">
+            <label for="nome">Nome</label>
+            <input formControlName="nome" type="text" pInputText />
+        </div>
+
+        <div class="form-group-2">
+            <div class="form-group">
+                <label for="tipo">Tipo</label>
+                <p-dropdown formControlName="tipo" placeholder="Selecione" [options]="opcoesTipo">Select city</p-dropdown>
+            </div>
+
+            <div class="form-group">
+                <label for="nome">Valor</label>
+                <p-inputNumber formControlName="valor" mode="currency" currency="BRL" locale="pt-BR"></p-inputNumber>
+            </div>
+        </div>
+
+        <div class="form-group-2">
+            <div class="form-group" style="width: 30%;">
+
+                <div class="data-form">
+                    <label for="data">Data </label>
+                    
+                    <div>
+                        <p-checkbox value="hoje" formControlName="checked" binary="true" (click)="habilitaData()"></p-checkbox>
+                        <label style="margin-left: 5px;" for="hoje">Hoje</label>
+                    </div>
+                    
+                </div>
+                
+                <input type="date" formControlName="data" pInputText />
+            </div>
+        </div>
+
+        <button type="submit" pButton label="Salvar"></button>
+    </form>
+</body>

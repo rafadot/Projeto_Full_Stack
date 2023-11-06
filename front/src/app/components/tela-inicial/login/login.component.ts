@@ -11,13 +11,13 @@ import { ToastUtilDirective } from 'src/app/shared/toast-util.directive';
 })
 export class LoginComponent implements OnInit {
 
-  toggleMask : boolean;
-
   constructor(
     private loginService : LoginService,
     private router : Router,
     private toastUtil : ToastUtilDirective
-    ) {}
+  ) {}
+
+  formModel : FormGroup;
 
   ngOnInit(): void {
     this.formModel = new FormGroup({
@@ -25,8 +25,6 @@ export class LoginComponent implements OnInit {
       password : new FormControl('', [Validators.required]),
     });
   }
-
-  formModel : FormGroup;
 
   submit() {
     if(this.formModel.valid){

@@ -1,0 +1,23 @@
+form{
+    margin-bottom: auto;
+}
+
+.form-group{
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-bottom: 12px;
+}
+
+.form-group-2{
+    display: flex;
+    flex-direction: row;
+    gap: 6px;
+    margin-bottom: 12px;
+}
+
+.data-form{
+    display: flex;
+    align-items: center;
+    gap: 10%;
+}

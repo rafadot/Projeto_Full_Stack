@@ -5,12 +5,18 @@ body{
 
 .content{
     margin-left: var(--app-menu-width);
+    padding-right: var(--app-menu-width);
+    position: fixed;
+    height: 100%;
     width: 100%;
     transition: var(--app-menu-transition);
 }
 
 .content-c{
     margin-left: var(--app-menu-c-width);
+    padding-right: var(--app-menu-c-width);
+    height: 100%;
     width: 100%;
+    position: fixed;
     transition: var(--app-menu-transition);
 }

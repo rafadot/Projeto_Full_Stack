@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { LOCALE_ID, NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -22,6 +22,17 @@ import { MenuComponent } from './components/dashboard/menu/menu.component';
 import { HeaderPageComponent } from './components/dashboard/header-page/header-page.component';
 import { ErrorInterceptador } from './shared/ErrorInterceptador';
 import { JwtInterceptador } from './shared/JwtInterceptador';
+import { FinanceiroComponent } from './components/dashboard/financeiro/financeiro.component';
+import {DialogService, DynamicDialogModule} from 'primeng/dynamicdialog';
+import { CriarGastoComponent } from './components/dashboard/financeiro/criar-gasto/criar-gasto.component';
+import {InputNumberModule} from 'primeng/inputnumber';
+import { DropdownModule } from 'primeng/dropdown';
+import {CalendarModule} from 'primeng/calendar';
+import {CheckboxModule} from 'primeng/checkbox';
+import { registerLocaleData } from '@angular/common';
+import localePt from '@angular/common/locales/pt';
+import { CriarCategoriaComponent } from './components/dashboard/financeiro/criar-categoria/criar-categoria.component';
+import {ColorPickerModule} from 'primeng/colorpicker';
 
 @NgModule({
   declarations: [
@@ -32,7 +43,10 @@ import { JwtInterceptador } from './shared/JwtInterceptador';
     TelaInicialComponent,
     DashboardComponent,
     MenuComponent,
-    HeaderPageComponent
+    HeaderPageComponent,
+    FinanceiroComponent,
+    CriarGastoComponent,
+    CriarCategoriaComponent,
   ],
   imports: [
     BrowserModule,
@@ -45,7 +59,13 @@ import { JwtInterceptador } from './shared/JwtInterceptador';
     ToastModule,
     PasswordModule,
     HttpClientModule,
-    ProgressSpinnerModule
+    ProgressSpinnerModule,
+    DynamicDialogModule,
+    InputNumberModule,
+    DropdownModule,
+    CalendarModule,
+    CheckboxModule,
+    ColorPickerModule
   ],
   providers: [
     {
@@ -58,9 +78,18 @@ import { JwtInterceptador } from './shared/JwtInterceptador';
       useClass : JwtInterceptador,
       multi : true
     },
+    {
+      provide : LOCALE_ID,
+      useValue : 'pt-BR'
+    },
     MessageService,
-    ToastUtilDirective
+    ToastUtilDirective,
+    DialogService
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule { 
+  constructor(){
+    registerLocaleData(localePt, 'pt-BR')
+  }
+}
